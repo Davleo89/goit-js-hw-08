@@ -20,3 +20,15 @@ img {
 ul{
   list-style: none;
 }
+
+a{
+  text-decoration: none;
+  color: #212121;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+a:hover{
+  color: red;
+  font-size: 24px;
+}
