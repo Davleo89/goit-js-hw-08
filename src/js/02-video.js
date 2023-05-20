@@ -6,8 +6,8 @@ const player = new Vimeo(iframe);
 
 const asynchronous = async () => {
 	try {
-		const timeSeconds = await player.getCurrentTime();
-		localStorage.setItem('current-time', timeSeconds);
+		const time_Seconds = await player.getCurrentTime();
+		localStorage.setItem('current-time', time_Seconds);
 	} catch (error) {
 		console.error('Error getting the current playing time of the video', error);
 	}
@@ -15,5 +15,5 @@ const asynchronous = async () => {
 
 player.on('play', throttle(asynchronous, 1000));
 
-const currentTime = localStorage.getItem('current-time');
-currentTime ? player.setCurrentTime(currentTime) : null;
+const current_Time = localStorage.getItem('current-time');
+current_Time ? player.setCurrentTime(current_Time) : null;
