@@ -1,29 +1,30 @@
 import { throttle } from 'lodash';
 
 const form = document.querySelector('.feedback-form');
-
 const emailInput = form.querySelector('input[name="email"]');
 const messageInput = form.querySelector('textarea[name="message"]');
 
-const save_FormData = () => {
-	const form_Data = {
+const saveFormData = () => {
+	const formData = {
 		email: emailInput.value,
 		message: messageInput.value,
 	};
-	localStorage.setItem('feedback-form-state', JSON.stringify(form_Data));
+	localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 };
 
-const load_FormData = () => {
+const loadFormData = () => {
 	const savedData = localStorage.getItem('feedback-form-state');
-	const { email, message } = savedData ? JSON.parse(savedData) : {};
-	emailInput.value = email;
-	messageInput.value = message;
+	if (savedData) {
+		const { email, message } = JSON.parse(savedData);
+		emailInput.value = email;
+		messageInput.value = message;
+	}
 };
 
 const handleSubmit = event => {
 	event.preventDefault();
 
-	const form_Data = {
+	const formData = {
 		email: emailInput.value,
 		message: messageInput.value,
 	};
@@ -33,9 +34,9 @@ const handleSubmit = event => {
 	emailInput.value = '';
 	messageInput.value = '';
 
-	console.log(form_Data);
+	console.log(formData);
 };
 
-form.addEventListener('input', throttle(save_FormData, 500));
-window.addEventListener('DOMContentLoaded', load_FormData);
+form.addEventListener('input', throttle(saveFormData, 500));
+window.addEventListener('DOMContentLoaded', loadFormData);
 form.addEventListener('submit', handleSubmit);
